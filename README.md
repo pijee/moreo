@@ -26,16 +26,33 @@ titi:678password
 # ENV Variables
 For a docker usage (*i'm still work on it*), Moreo's configuration is from environment variable.
 
+### Must be initialized
+```
+MOREO_WEB_PORT  = local port where Moreo listen
+MOREO_DB_PATH   = local db file (description above)
+```
+
+### Extra options (can be empty or uninitialized)
+```
+MOREO_WEB_IP        = IP to make Moreo listening on (by default, all availables)
+MOREO_TOKEN_LIFE    = token life (by default 15 minutes)
+MOREO_DEBUG         = to active debugs routes and functionnalities
+```
+
 # List of commands
 I used [minecraft wiki commands](https://minecraft.fandom.com/wiki/Commands) to implement commands supported by the API.
 
 # Work in progress
+
+### Server basics
 - [x] Authentification
 - [x] Token creation and verification
 - [x] User login
 - [x] Debug Rcon Connection
 - [ ] Swagger
 - [ ] Dockerfile
+
+### Minecraft Commands
 - [x] [/advancement](https://minecraft.fandom.com/wiki/Commands/advancement)
 - [x] [/attribute](https://minecraft.fandom.com/wiki/Commands/attribute)
 - [x] [/ban](https://minecraft.fandom.com/wiki/Commands/ban)
