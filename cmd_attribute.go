@@ -73,7 +73,8 @@ func ( ws *WebServer )attributeModifierAdd( w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	if (vars["operation"] != "add") && (vars["operation"] != "multiply") && (vars["operation"] != "multiply_base") {
+	operations := []string{ "add", "multiply", "multiply_base" }
+	if !ws.inArray( vars["operation"], operations ) {
 		w.WriteHeader( http.StatusBadRequest )	// 400
 		return
 	}

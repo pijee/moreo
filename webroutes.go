@@ -36,4 +36,21 @@ func ( ws *WebServer )setAllRoutes() {
 	// https://minecraft.fandom.com/wiki/Commands/ban#banlist
 	ws.router.HandleFunc( "/banlist/", ws.banlist ).Methods( "GET" )
 	ws.router.HandleFunc( "/banlist/{cat}", ws.banlistFiltered ).Methods( "GET" )
+
+	// https://minecraft.fandom.com/wiki/Commands/bossbar
+	ws.router.HandleFunc( "/bossbar/add/{id}/{name}", ws.bossbarAdd ).Methods( "POST" )
+	ws.router.HandleFunc( "/bossbar/get/{id}/{value}", ws.bossbarGet ).Methods( "GET" )
+	ws.router.HandleFunc( "/bossbar/list", ws.bossbarList ).Methods( "GET" )
+	ws.router.HandleFunc( "/bossbar/remove/{id}", ws.bossbarRemove ).Methods( "DELETE" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/color/{color}", ws.bossbarSetColor ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/max/{max}", ws.bossbarSetMax ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/name/{name}", ws.bossbarSetName ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/players/{player}", ws.bossbarSetPlayers ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/style/{style}", ws.bossbarSetStyle ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/value/{value}", ws.bossbarSetValue ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/bossbar/set/{id}/visible/{visible}", ws.bossbarSetVisible ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/clear
+	ws.router.HandleFunc( "/bossbar/clear/{target}/{item}/{maxcount}", ws.clear ).Methods( "PATCH" )
+
 }

@@ -10,7 +10,8 @@ import (
 // advancement (grant|revoke) <targets> everything
 func ( ws *WebServer )advancementEverything( w http.ResponseWriter, r *http.Request ) {
 	vars := mux.Vars( r )
-	if (vars["action"] != "grant") && (vars["action"] != "revoke") {
+	actions := []string{ "grant", "revoke" }
+	if !ws.inArray( vars["action"], actions ) {
 		w.WriteHeader( http.StatusBadRequest )	// HTTP 400
 		return
 	}
@@ -31,18 +32,17 @@ func ( ws *WebServer )advancementEverything( w http.ResponseWriter, r *http.Requ
 	w.Write( []byte(msg.Body) )
 }
 
-// advancement (grant|revoke) <targets> only <advancement>
-// advancement (grant|revoke) <targets> from <advancement>
-// advancement (grant|revoke) <targets> through <advancement>
-// advancement (grant|revoke) <targets> until <advancement>
+// advancement (grant|revoke) <targets> (only|from|through|until) <advancement>
 func ( ws *WebServer )advancementFilter( w http.ResponseWriter, r *http.Request ) {
 	vars := mux.Vars( r )
-	if (vars["action"] != "grant") && (vars["action"] != "revoke") {
+	actions := []string{ "grant", "revoke" }
+	if !ws.inArray( vars["action"], actions ) {
 		w.WriteHeader( http.StatusBadRequest )	// HTTP 400
 		return
 	}
 
-	if (vars["filter"] != "only") && (vars["filter"] != "from") && (vars["filter"] != "through") && (vars["filter"] != "until") {
+	filters := []string{ "only", "from", "through", "until" }
+	if !ws.inArray( vars["filter"], filters ) {
 		w.WriteHeader( http.StatusBadRequest )	// HTTP 400
 		return
 	}

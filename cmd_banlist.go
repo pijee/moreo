@@ -33,7 +33,8 @@ func ( ws *WebServer )banlistFiltered( w http.ResponseWriter, r *http.Request ) 
 		return
 	}
 
-	if (vars["cat"] != "ips") && (vars["cat"] != "players") {
+	cats := []string{ "ips", "players" }
+	if !ws.inArray( vars["cat"], cats ) {
 		w.WriteHeader( http.StatusBadRequest )	// 400
 		return
 	}

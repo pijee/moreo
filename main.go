@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	TOKEN_LIFE 		 	= 15 * time.Minute
+	TOKEN_LIFE 			= 15 * time.Minute
 	DB_CLEAN_INTERVAL	= 5 * time.Minute
 )
 
