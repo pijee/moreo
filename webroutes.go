@@ -57,4 +57,16 @@ func ( ws *WebServer )setAllRoutes() {
 	ws.router.HandleFunc( "/clone/{action}/{mode}", ws.clone ).Methods( "POST" )
 	ws.router.HandleFunc( "/clone/filtered/{filter}/{mode}", ws.cloneFitlered ).Methods( "POST" )
 
+	// https://minecraft.fandom.com/wiki/Commands/debug
+	ws.router.HandleFunc( "/debug/{action}", ws.debug ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/defaultgamemode
+	ws.router.HandleFunc( "/defaultgamemode/{mode}", ws.defaultgamemode ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/difficulty
+	ws.router.HandleFunc( "/difficulty/{difficulty}", ws.difficulty ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/effect
+	ws.router.HandleFunc( "/effect/clear/{effect}", ws.effectClear ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/effect/give/{effect}/{seconds}/{amplifier}/{hideparticles}", ws.effectGive ).Methods( "PATCH" )
 }
