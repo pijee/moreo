@@ -8,7 +8,7 @@ Once you're connected, Moreo send you token to interact with API (like a normal 
 Each token spread **one rcon server**. That's mean you can interact with many differents servers with the same account in same times, with differents tokens.
 Moreo execute command on rcon server for you and send you result.
 
-For managing connection, Moreo use [Will Robert's Minecraft-Client](github.com/willroberts/minecraft-client)
+For managing connection, Moreo use [Will Robert's Minecraft-Client](http://github.com/willroberts/minecraft-client)
 
 # Users Database
 Database for identify users is a simple file in the directory of your choice. Format use is :
