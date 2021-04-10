@@ -73,3 +73,17 @@ type DebugPost struct {
 	Password 	string 	`json:"password"`
 	Cmd 		string 	`json:"cmd"`
 }
+
+// Minecraft struct block
+type BlockPos struct {
+	X 	int 	`json:"x"`
+	Y 	int 	`json:"y"`
+	Z 	int 	`json:"z"`
+}
+
+// Struct for /clone cmd
+type ClonePost struct {
+	Begin 			BlockPos 	`json:"begin"`
+	End 			BlockPos 	`json:"end"`
+	Destination 	BlockPos 	`json:"destination"`
+}

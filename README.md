@@ -60,7 +60,7 @@ I used [minecraft wiki commands](https://minecraft.fandom.com/wiki/Commands) to 
 - [x] [/banlist](https://minecraft.fandom.com/wiki/Commands/ban#banlist)
 - [x] [/bossbar](https://minecraft.fandom.com/wiki/Commands/bossbar)
 - [x] [/clear](https://minecraft.fandom.com/wiki/Commands/clear)
-- [ ] [/clone](https://minecraft.fandom.com/wiki/Commands/clone)
+- [x] [/clone](https://minecraft.fandom.com/wiki/Commands/clone)
 - [ ] [/data](https://minecraft.fandom.com/wiki/Commands/data)
 - [ ] [/debug](https://minecraft.fandom.com/wiki/Commands/debug)
 - [ ] [/defaultgamemode](https://minecraft.fandom.com/wiki/Commands/defaultgamemode)

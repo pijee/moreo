@@ -53,4 +53,8 @@ func ( ws *WebServer )setAllRoutes() {
 	// https://minecraft.fandom.com/wiki/Commands/clear
 	ws.router.HandleFunc( "/bossbar/clear/{target}/{item}/{maxcount}", ws.clear ).Methods( "PATCH" )
 
+	// https://minecraft.fandom.com/wiki/Commands/clone
+	ws.router.HandleFunc( "/clone/{action}/{mode}", ws.clone ).Methods( "POST" )
+	ws.router.HandleFunc( "/clone/filtered/{filter}/{mode}", ws.cloneFitlered ).Methods( "POST" )
+
 }
