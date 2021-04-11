@@ -111,4 +111,11 @@ func ( ws *WebServer )setAllRoutes() {
 
 	// https://minecraft.fandom.com/wiki/Commands/msg
 	ws.router.HandleFunc( "/msg", ws.msg ).Methods( "POST" )
+
+	// https://minecraft.fandom.com/wiki/Commands/op
+	ws.router.HandleFunc( "/op/{target}", ws.op ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/pardon
+	ws.router.HandleFunc( "/pardon/{target}", ws.pardon ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/pardonip/{target}", ws.pardonIP ).Methods( "PATCH" )
 }

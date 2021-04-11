@@ -44,6 +44,8 @@ I used [minecraft wiki commands](https://minecraft.fandom.com/wiki/Commands) to 
 
 # Work in progress
 
+***Some functions may be truncated due to usage of rest api.***
+
 ### Server basics
 - [x] Authentification
 - [x] Token creation and verification
@@ -84,9 +86,9 @@ I used [minecraft wiki commands](https://minecraft.fandom.com/wiki/Commands) to 
 - [ ] [/loot](https://minecraft.fandom.com/wiki/Commands/loot)
 - [x] [/me](https://minecraft.fandom.com/wiki/Commands/me)
 - [x] [/msg](https://minecraft.fandom.com/wiki/Commands/msg)
-- [ ] [/op](https://minecraft.fandom.com/wiki/Commands/op)
-- [ ] [/pardon](https://minecraft.fandom.com/wiki/Commands/pardon)
-- [ ] [/pardon-ip](https://minecraft.fandom.com/wiki/Commands/pardon#pardon-ip)
+- [x] [/op](https://minecraft.fandom.com/wiki/Commands/op)
+- [x] [/pardon](https://minecraft.fandom.com/wiki/Commands/pardon)
+- [x] [/pardon-ip](https://minecraft.fandom.com/wiki/Commands/pardon#pardon-ip)
 - [ ] [/particle](https://minecraft.fandom.com/wiki/Commands/particle)
 - [ ] [/playsound](https://minecraft.fandom.com/wiki/Commands/playsound)
 - [ ] [/publish](https://minecraft.fandom.com/wiki/Commands/publish)
