@@ -55,9 +55,9 @@ type RconReturnMessage struct {
 	Body string
 }
 
-// Struct for /ban command
-type BanUserPost struct {
-	Reason 	string  `json:"reason"`
+// Struct for /ban command and other commands who need reason message
+type ReasonPost struct {
+	Message 	string  `json:"message"`
 }
 
 // Struct for /banip command
@@ -88,7 +88,14 @@ type ClonePost struct {
 	Destination 	BlockPos 	`json:"destination"`
 }
 
+// Struct for /kick cmd
 type KickPost struct {
 	Name 		string 		`json:"name"`
 	Reason 		string 		`json:"reason"`
+}
+
+// Struct for /msg /tell /w commands
+type MsgPost struct {
+	Target 		string 		`json:"target"`
+	Message		string 		`json:"message"`
 }

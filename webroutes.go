@@ -99,4 +99,16 @@ func ( ws *WebServer )setAllRoutes() {
 	// https://minecraft.fandom.com/wiki/Commands/list
 	ws.router.HandleFunc( "/list", ws.list ).Methods( "GET" )
 	ws.router.HandleFunc( "/list/uuids", ws.listUUIDS ).Methods( "GET" )
+
+	// https://minecraft.fandom.com/wiki/Commands/locate
+	ws.router.HandleFunc( "/locate/{type}", ws.locate ).Methods( "GET" )
+
+	// https://minecraft.fandom.com/wiki/Commands/locatebiome
+	ws.router.HandleFunc( "/locatebiome/{id}", ws.locatebiome ).Methods( "GET" )
+
+	// https://minecraft.fandom.com/wiki/Commands/me
+	ws.router.HandleFunc( "/me", ws.me ).Methods( "POST" )
+
+	// https://minecraft.fandom.com/wiki/Commands/msg
+	ws.router.HandleFunc( "/msg", ws.msg ).Methods( "POST" )
 }
