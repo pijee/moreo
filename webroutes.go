@@ -69,4 +69,34 @@ func ( ws *WebServer )setAllRoutes() {
 	// https://minecraft.fandom.com/wiki/Commands/effect
 	ws.router.HandleFunc( "/effect/clear/{effect}", ws.effectClear ).Methods( "PATCH" )
 	ws.router.HandleFunc( "/effect/give/{effect}/{seconds}/{amplifier}/{hideparticles}", ws.effectGive ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/enchant
+	ws.router.HandleFunc( "/enchant/{target}/{enchantment}/{level}", ws.enchant ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/experience
+	ws.router.HandleFunc( "/experience/{action}/{target}/{enchantment}/{level}", ws.experienceModify ).Methods( "PATCH" )
+	ws.router.HandleFunc( "/experience/query/{target}/{level}", ws.experienceQuery ).Methods( "GET" )
+
+	// https://minecraft.fandom.com/wiki/Commands/gamemode
+	ws.router.HandleFunc( "/gamemode/{mode}/{target}", ws.gamemode ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/gamerule
+	ws.router.HandleFunc( "/gamerule/{rule}/{value}", ws.gamerule ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/give
+	ws.router.HandleFunc( "/give/{target}/{item}/{count}", ws.give ).Methods( "PATCH" )
+
+	// https://minecraft.fandom.com/wiki/Commands/help
+	ws.router.HandleFunc( "/help", ws.help ).Methods( "GET" )
+	ws.router.HandleFunc( "/help/{cmd}", ws.helpCmd ).Methods( "GET" )
+
+	// https://minecraft.fandom.com/wiki/Commands/kick
+	ws.router.HandleFunc( "/kick", ws.kick ).Methods( "POST" )
+
+	// https://minecraft.fandom.com/wiki/Commands/kill
+	ws.router.HandleFunc( "/kill/{target}", ws.kill ).Methods( "DELETE" )
+
+	// https://minecraft.fandom.com/wiki/Commands/list
+	ws.router.HandleFunc( "/list", ws.list ).Methods( "GET" )
+	ws.router.HandleFunc( "/list/uuids", ws.listUUIDS ).Methods( "GET" )
 }

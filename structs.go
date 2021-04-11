@@ -87,3 +87,8 @@ type ClonePost struct {
 	End 			BlockPos 	`json:"end"`
 	Destination 	BlockPos 	`json:"destination"`
 }
+
+type KickPost struct {
+	Name 		string 		`json:"name"`
+	Reason 		string 		`json:"reason"`
+}
