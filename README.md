@@ -14,9 +14,10 @@ And if a new rcon function appears, it will be automaticly supported by Moreo.
 
 #
 # How it works ?
-Moreo authentificate users by small database file (explication bellow).
-Once you're connected, you send POST query with your command and Moreo send to your Minecraft rcon server and send you result.
-Each token spreads **one rcon server**. That's mean you can interact with many differents servers with the same account in same times, with differents tokens.
+Moreo authentificate users by checking user/password in small database file (explication bellow) and by sending token after.
+Once you're authentified, you send both token (authentification bearer) and POST query with your command, Moreo do the rest.
+It will send your command to your Minecraft rcon server and return you result in body message.
+Each token spreads **one rcon server**. That's mean you can interact with many differents servers with the same account in same times, with differents tokens (Moreo keep rcon authentification in memory and reuse it each time you need).
 
 For managing rcon connection, Moreo use [Will Robert's Minecraft-Client](http://github.com/willroberts/minecraft-client)
 
