@@ -97,7 +97,7 @@ By using this, you disable Moreo's authentification process and send POST comman
 #
 # Tokens
 Moreo use my own [jwt package implementation](https://github.com/pijee/pjwt).
-When starting, Moreo generate random 512 bits key to sign tokens. Each 2 hours, this key is regenerate and the tokens db is truncated.
+When starting, Moreo generate random 512 bits key to sign tokens. Every 2 hours, this key is regenerated and the tokens db is truncated.
 
 #
 # Example (with curl)

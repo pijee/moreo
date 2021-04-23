@@ -30,6 +30,7 @@ func init() {
 		os.Exit( 0 )
 	}
 
+	// Support admin's token life setting
 	tl, err := strconv.Atoi( os.Getenv( "MOREO_TOKEN_LIFE") )
 	if err == nil { TOKEN_LIFE = time.Duration(tl) * time.Minute }
 }
