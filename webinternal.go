@@ -108,8 +108,3 @@ func ( ws *WebServer )rconExecute( rcon RconAccess, cmd string ) RconReturnMessa
 
 	return RconReturnMessage{ http.StatusOK, resp.Body }
 }
-
-func ( ws *WebServer )inArray( value string, array []string ) bool {
-	for _, v := range array { if v == value { return true } }
-	return false
-}

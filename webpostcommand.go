@@ -2,28 +2,24 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
-// tell <targets> <message>
-// msg <targets> <message>
-// w <targets> <message>
-func ( ws *WebServer )msg( w http.ResponseWriter, r *http.Request ) {
+// Use by /post route to send user's command to rcon server
+func ( ws *WebServer )postCommand( w http.ResponseWriter, r *http.Request ) {
 	arm := ws.checkAccess( r )
 	if arm.HTTPCode != 200 {
 		w.WriteHeader( arm.HTTPCode )
 		return
 	}
 
-	var post MsgPost
+	var post CommandPost
 	if err := json.NewDecoder( r.Body ).Decode( &post ); err != nil {
 		w.WriteHeader( http.StatusBadRequest )	// 400
 		return
 	}
 
-	cmd := fmt.Sprintf( "msg %s %s", post.Target, post.Message )
-	msg := ws.rconExecute( arm.RconAccess, cmd )
+	msg := ws.rconExecute( arm.RconAccess, post.Cmd )
 	if msg.Code != 200 {
 		w.WriteHeader( msg.Code )
 		return

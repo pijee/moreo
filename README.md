@@ -1,15 +1,26 @@
-# RestFull API server for Minecraft (JAVA Edition) Rcon Server writen in Go
+# ~~RestFull API server for Minecraft (JAVA Edition) Rcon Server writen in Go~~
 
-Moreo provide a web proxy server than interact with your minecraft server's rcon service for you by an RestFull API.
+~~Moreo provide a web proxy server than interact with your minecraft server rcon service for you by an RestFull API.~~
 
+#
+# Web Proxy server for Mineraft (JAVA Edition) Rcon Server written in Go
+After some works on this project, i realized that build rest full api for each functions is boring and limited.
+- Boring to write exactly some code for each functions (test token, parse data, send to rcon server)
+- Limited because somes Minecraft functions are very complex to implement and obiously, i had to take some decisions to make it works
+
+So i decided to write only one function who receives any minecraft rcon commands in POST and send it directly to rcon server.
+This new way allows to use unofficial Minecraft Server like Spigot because we are not limited to some functions now.
+If a new rcon function appears, it will be automaticly supported by Moreo.
+
+#
 # How it works ?
 Moreo authentificate users by small database file (explication bellow).
-Once you're connected, Moreo send you token to interact with API (like a normal RestFUll API).
-Each token spread **one rcon server**. That's mean you can interact with many differents servers with the same account in same times, with differents tokens.
-Moreo execute command on rcon server for you and send you result.
+Once you're connected, you send POST query with your command and Moreo send to your Minecraft rcon server and send you result.
+Each token spreads **one rcon server**. That's mean you can interact with many differents servers with the same account in same times, with differents tokens.
 
 For managing connection, Moreo use [Will Robert's Minecraft-Client](http://github.com/willroberts/minecraft-client)
 
+#
 # Users Database
 Database for identify users is a simple file in the directory of your choice. Format use is :
 ```
@@ -22,7 +33,7 @@ toto:123some
 tata:456magic
 titi:678password
 ```
-
+#
 # ENV Variables
 For a docker usage (*i'm still work on it*), Moreo's configuration is from environment variable.
 
@@ -38,92 +49,154 @@ MOREO_WEB_IP        = IP to make Moreo listening on (by default, all availables)
 MOREO_TOKEN_LIFE    = token life (by default 15 minutes)
 MOREO_DEBUG         = to active debugs routes and functionnalities
 ```
-
-# List of commands
-I used [minecraft wiki commands](https://minecraft.fandom.com/wiki/Commands) to implement commands supported by the API.
-
+#
 # Work in progress
-
-***Some functions may be truncated due to usage of rest api.***
 
 ### Server basics
 - [x] Authentification
 - [x] Token creation and verification
 - [x] User login
 - [x] Debug Rcon Connection
-- [ ] Swagger
+- [x] Send commands to rcon server
 - [ ] Dockerfile
 
-### Minecraft Commands
-- [x] [/advancement](https://minecraft.fandom.com/wiki/Commands/advancement)
-- [x] [/attribute](https://minecraft.fandom.com/wiki/Commands/attribute)
-- [x] [/ban](https://minecraft.fandom.com/wiki/Commands/ban)
-- [x] [/ban-ip](https://minecraft.fandom.com/wiki/Commands/ban#ban-ip)
-- [x] [/banlist](https://minecraft.fandom.com/wiki/Commands/ban#banlist)
-- [x] [/bossbar](https://minecraft.fandom.com/wiki/Commands/bossbar)
-- [x] [/clear](https://minecraft.fandom.com/wiki/Commands/clear)
-- [x] [/clone](https://minecraft.fandom.com/wiki/Commands/clone)
-- [ ] [/data](https://minecraft.fandom.com/wiki/Commands/data)
-- [x] [/debug](https://minecraft.fandom.com/wiki/Commands/debug)
-- [x] [/defaultgamemode](https://minecraft.fandom.com/wiki/Commands/defaultgamemode)
-- [x] [/difficulty](https://minecraft.fandom.com/wiki/Commands/difficulty)
-- [x] [/effect](https://minecraft.fandom.com/wiki/Commands/effect)
-- [x] [/enchant](https://minecraft.fandom.com/wiki/Commands/enchant)
-- [ ] [/execute](https://minecraft.fandom.com/wiki/Commands/execute)
-- [x] [/experience](https://minecraft.fandom.com/wiki/Commands/experience)
-- [ ] [/fill](https://minecraft.fandom.com/wiki/Commands/fill)
-- [ ] [/forceload](https://minecraft.fandom.com/wiki/Commands/forceload)
-- [ ] [/function](https://minecraft.fandom.com/wiki/Commands/function)
-- [x] [/gamemode](https://minecraft.fandom.com/wiki/Commands/gamemode)
-- [x] [/gamerule](https://minecraft.fandom.com/wiki/Commands/gamerule)
-- [x] [/give](https://minecraft.fandom.com/wiki/Commands/give)
-- [x] [/help](https://minecraft.fandom.com/wiki/Commands/help)
-- [x] [/kick](https://minecraft.fandom.com/wiki/Commands/kick)
-- [x] [/kill](https://minecraft.fandom.com/wiki/Commands/kill)
-- [x] [/list](https://minecraft.fandom.com/wiki/Commands/list)
-- [x] [/locate](https://minecraft.fandom.com/wiki/Commands/locate)
-- [x] [/locatebiome](https://minecraft.fandom.com/wiki/Commands/locatebiome)
-- [ ] [/loot](https://minecraft.fandom.com/wiki/Commands/loot)
-- [x] [/me](https://minecraft.fandom.com/wiki/Commands/me)
-- [x] [/msg](https://minecraft.fandom.com/wiki/Commands/msg)
-- [x] [/op](https://minecraft.fandom.com/wiki/Commands/op)
-- [x] [/pardon](https://minecraft.fandom.com/wiki/Commands/pardon)
-- [x] [/pardon-ip](https://minecraft.fandom.com/wiki/Commands/pardon#pardon-ip)
-- [ ] [/particle](https://minecraft.fandom.com/wiki/Commands/particle)
-- [ ] [/playsound](https://minecraft.fandom.com/wiki/Commands/playsound)
-- [ ] [/publish](https://minecraft.fandom.com/wiki/Commands/publish)
-- [ ] [/recipe](https://minecraft.fandom.com/wiki/Commands/recipe)
-- [ ] [/reload](https://minecraft.fandom.com/wiki/Commands/reload)
-- [ ] [/save-all](https://minecraft.fandom.com/wiki/Commands/save#save-all)
-- [ ] [/save-off](https://minecraft.fandom.com/wiki/Commands/save#save-off)
-- [ ] [/save-on](https://minecraft.fandom.com/wiki/Commands/save#save-on)
-- [ ] [/say](https://minecraft.fandom.com/wiki/Commands/say)
-- [ ] [/schedule](https://minecraft.fandom.com/wiki/Commands/schedule)
-- [ ] [/scoreboard](https://minecraft.fandom.com/wiki/Commands/scoreboard)
-- [ ] [/seed](https://minecraft.fandom.com/wiki/Commands/seed)
-- [ ] [/setblock](https://minecraft.fandom.com/wiki/Commands/setblock)
-- [ ] [/setidletimeout](https://minecraft.fandom.com/wiki/Commands/setidletimeout)
-- [ ] [/setworldspawn](https://minecraft.fandom.com/wiki/Commands/setworldspawn)
-- [ ] [/spawnpoint](https://minecraft.fandom.com/wiki/Commands/spawnpoint)
-- [ ] [/spectate](https://minecraft.fandom.com/wiki/Commands/spectate)
-- [ ] [/spreadplayers](https://minecraft.fandom.com/wiki/Commands/spreadplayers)
-- [ ] [/stop](https://minecraft.fandom.com/wiki/Commands/stop)
-- [ ] [/stopsound](https://minecraft.fandom.com/wiki/Commands/stopsound)
-- [ ] [/summon](https://minecraft.fandom.com/wiki/Commands/summon)
-- [ ] [/tag](https://minecraft.fandom.com/wiki/Commands/tag)
-- [ ] [/team](https://minecraft.fandom.com/wiki/Commands/team)
-- [ ] [/teammsg](https://minecraft.fandom.com/wiki/Commands/teammsg)
-- [ ] [/teleport](https://minecraft.fandom.com/wiki/Commands/teleport)
-- [ ] [/tell](https://minecraft.fandom.com/wiki/Commands/tell)
-- [ ] [/tellraw](https://minecraft.fandom.com/wiki/Commands/tellraw)
-- [ ] [/time](https://minecraft.fandom.com/wiki/Commands/time)
-- [ ] [/title](https://minecraft.fandom.com/wiki/Commands/title)
-- [ ] [/tm](https://minecraft.fandom.com/wiki/Commands/tm)
-- [ ] [/tp](https://minecraft.fandom.com/wiki/Commands/tp)
-- [ ] [/trigger](https://minecraft.fandom.com/wiki/Commands/trigger)
-- [ ] [/w](https://minecraft.fandom.com/wiki/Commands/w)
-- [ ] [/weather](https://minecraft.fandom.com/wiki/Commands/weather)
-- [ ] [/whitelist](https://minecraft.fandom.com/wiki/Commands/whitelist)
-- [ ] [/worldborder](https://minecraft.fandom.com/wiki/Commands/worldborder)
-- [ ] [/xp](https://minecraft.fandom.com/wiki/Commands/xp)
-- [ ] [/replaceitem](https://minecraft.fandom.com/wiki/Commands/replaceitem)
+#
+# Authentification
+
+To authenticated user, you need to post data in json format
+
+```json
+{
+    "user": {
+        "name": "",     // user name in local db file
+        "password": ""  // user's password
+    },
+    "rcon": {
+        "host": "",     // rcon name or ip
+        "port": 25575,  // rcon port
+        "password": ""  // password set in server.properties
+    }
+}
+```
+#
+# Send command
+
+To send command (after authentification), post data in json format
+
+```json
+{
+    "cmd": "any minecraft rcon commands available"
+}
+
+```
+# Example
+
+A small example with curl on terminal. I have a spigot server running on docker with rcon opened on my local computer (localhost 25575 "password")
+
+>Starting Moreo
+```console
+export MOREO_WEB_PORT=8080
+export MOREO_DB_FILE=./users.db
+./moreo
+```
+
+>Authentification using curl
+```console
+curl -v -X POST -H "Content-Type: application/json" -d '{ "user":{ "name": "toto", "password": "123"}, "rcon":{ "host": "127.0.0.1", "port": 25575, "password": "password"}}' http://127.0.0.1:8080/login
+```
+
+>Curl result
+```console
+*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> POST /login HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.76.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 116
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Date: Fri, 23 Apr 2021 11:19:42 GMT
+< Content-Length: 210
+< Content-Type: text/plain; charset=utf-8
+<
+* Connection #0 to host 127.0.0.1 left intact
+eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjUxMGM0N2ItNGE4OC00NWM2LTUyNzQtMDU1MmNhM2E2OTNlIiwiZXhwIjoxNjE5MTc3NjgyfQ.dSBerBJKKRgGvUxexP70jKJL1vgbgWgIawtzoWZ_LV-7EkE0ZWju0dvDBZJg0PqI-YdehfbIT6jaOmg0xVhYQg
+```
+
+>It's ok, i 've got my token, continue ...
+
+```console
+curl -v -X POST -H "Content-Type: application/json" -H "Authorization: bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjUxMGM0N2ItNGE4OC00NWM2LTUyNzQtMDU1MmNhM2E2OTNlIiwiZXhwIjoxNjE5MTc3NjgyfQ.dSBerBJKKRgGvUxexP70jKJL1vgbgWgIawtzoWZ_LV-7EkE0ZWju0dvDBZJg0PqI-YdehfbIT6jaOmg0xVhYQg" -d '{ "cmd": "help" }' http://127.0.0.1:8080/post
+```
+
+>Rcon response
+```console
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Date: Fri, 23 Apr 2021 11:23:39 GMT
+< Content-Length: 434
+< Content-Type: text/plain; charset=utf-8
+<
+§e--------- §fHelp: Index (1/10) §e--------------------
+§7Use /help [n] to get page n of help.
+§6Aliases: §fLists command aliases
+§6Bukkit: §fAll commands for Bukkit
+§6Minecraft: §fAll commands for Minecraft
+§6/advancement: §fA Mojang provided command.
+§6/attribute: §fA Mojang provided command.
+§6/ban: §fA Mojang provided command.
+§6/ban-ip: §fA Mojang provided command.
+§6/banlist: §fA Mojang provided command.
+* Connection #0 to host 127.0.0.1 left intact
+```
+
+>Let's try some other command
+```console
+curl -v -X POST -H "Content-Type: application/json" -H "Authorization: bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjUxMGM0N2ItNGE4OC00NWM2LTUyNzQtMDU1MmNhM2E2OTNlIiwiZXhwIjoxNjE5MTc3NjgyfQ.dSBerBJKKRgGvUxexP70jKJL1vgbgWgIawtzoWZ_LV-7EkE0ZWju0dvDBZJg0PqI-YdehfbIT6jaOmg0xVhYQg" -d '{ "cmd": "say Hello World !" }' http://127.0.0.1:8080/post
+```
+
+>Curl result
+```console
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Date: Fri, 23 Apr 2021 11:24:44 GMT
+< Content-Length: 0
+<
+* Connection #0 to host 127.0.0.1 left intact
+```
+
+>Minecraft server console (docker logs -f [container_name])
+```console
+[11:24:44] [RCON Listener #1/INFO]: Thread RCON Client /172.19.0.1 started
+[11:24:44] [Server thread/INFO]: [Rcon] Hello World !
+[11:24:44] [RCON Client /172.19.0.1 #10/INFO]: Thread RCON Client /172.19.0.1 shutting down
+```
+
+>In game
+
+![screen1](./images/screen1.png)
+
+#
+# Timeout
+
+An internal go routine is running each X minutes (by default : 5) and clean local token database.
+If i'm waiting few minutes and send same request
+
+```console
+curl -v -X POST -H "Content-Type: application/json" -H "Authorization: bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjUxMGM0N2ItNGE4OC00NWM2LTUyNzQtMDU1MmNhM2E2OTNlIiwiZXhwIjoxNjE5MTc3NjgyfQ.dSBerBJKKRgGvUxexP70jKJL1vgbgWgIawtzoWZ_LV-7EkE0ZWju0dvDBZJg0PqI-YdehfbIT6jaOmg0xVhYQg" -d '{ "cmd": "say Hello World !" }' http://127.0.0.1:8080/post
+```
+
+>Curl result
+```console
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 403 Forbidden
+< Date: Fri, 23 Apr 2021 11:34:53 GMT
+< Content-Length: 0
+<
+* Connection #0 to host 127.0.0.1 left intact
+```
+
+>403 sent because my token is outdated

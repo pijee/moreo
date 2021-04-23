@@ -37,8 +37,20 @@ func NewWebServer() *WebServer {
 		log.Fatal( "Unable to load users database" )
 	}
 
+	//
 	// All routes
-	ws.setAllRoutes()
+	//
+
+	// User proxy login
+	ws.router.HandleFunc( "/login", ws.login ).Methods( "POST" )
+
+	// For debugging
+	if os.Getenv( "MOREO_DEBUG" ) == "1" {
+		ws.router.HandleFunc( "/debug/rcon/post", ws.debugRCON ).Methods( "POST" )	// create & execute rcon command
+	}
+
+	// Send command to rcon server after being authenticated
+	ws.router.HandleFunc( "/post", ws.postCommand ).Methods( "POST" )
 
 	ws.Handler = ws.router
 	return ws
