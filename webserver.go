@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
 	"log"
 	"net/http"
@@ -18,14 +19,13 @@ func NewWebServer() *WebServer {
 			ReadTimeout: 10 * time.Second,
 			WriteTimeout: 10 * time.Second,
 		},
-		key: make( []byte, 32 ),
+		key: make( []byte, 64 ),
 		router: mux.NewRouter(),
 		tokensDB: make( map[string]RconAccess ),
 	}
 
 	// Init key for signing tokens
-	// rand.Read( ws.key )
-	ws.key = []byte{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+	rand.Read( ws.key )
 
 	// Routine for cleaning tokens database and watching sigterm signals
 	go ws.cleanService()

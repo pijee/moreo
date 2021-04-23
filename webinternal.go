@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/rand"
 	"fmt"
 	"net/http"
 	"os"
@@ -20,23 +21,34 @@ func ( ws *WebServer )cleanService() {
 	end := make( chan os.Signal, 1 )
 	signal.Notify( end, syscall.SIGINT, syscall.SIGTERM )
 
-	// Schedulde clean tokens database
-	ticker := time.NewTicker( DB_CLEAN_INTERVAL )
+	// Schedulde clean tokens database and new key
+	tokensdbTicker := time.NewTicker( DB_CLEAN_INTERVAL )
+	keyTicker := time.NewTicker( KEY_GENERATION_INTERVAL )
 	for {
 		select {
 			// Stop server
 			case <-end:
-				ticker.Stop()
+				tokensdbTicker.Stop()
+				keyTicker.Stop()
 				ws.Shutdown( context.TODO() )
 				return
 
 			// Range over all tokens and check validity. If token is expired, drop it
-			case <-ticker.C:
+			case <-tokensdbTicker.C:
 				for k,v := range ws.tokensDB {
 					if v.Expire < time.Now().Unix() {
 						delete( ws.tokensDB, k )
 					}
 				}
+
+			// Create new key and truncate tokens db
+			case <-keyTicker.C:
+				// Gen new sign key
+				rand.Read( ws.key )
+
+				// Truncate tokens db
+				ws.tokensDB = make( map[string]RconAccess )
+
 		}
 	}
 }

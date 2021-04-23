@@ -3,12 +3,14 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 )
 
 var (
-	TOKEN_LIFE 			= 15 * time.Minute
-	DB_CLEAN_INTERVAL	= 5 * time.Minute
+	TOKEN_LIFE 				= 15 * time.Minute
+	DB_CLEAN_INTERVAL		= 5 * time.Minute
+	KEY_GENERATION_INTERVAL = 2 * time.Hour
 )
 
 // Check environment variables for connections
@@ -27,6 +29,9 @@ func init() {
 		fmt.Println( "- MOREO_DEBUG : \tactive debugs functionnalities (value need to be 1, default 0)" )
 		os.Exit( 0 )
 	}
+
+	tl, err := strconv.Atoi( os.Getenv( "MOREO_TOKEN_LIFE") )
+	if err == nil { TOKEN_LIFE = time.Duration(tl) * time.Minute }
 }
 
 // Start of program
