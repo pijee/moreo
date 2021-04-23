@@ -53,7 +53,7 @@ MOREO_DEBUG         = to active debugs routes and functionnalities
 #
 # Authentification
 
-To authenticated user, you need to post data in json format
+To authenticated user and get access token, you need to post data in json format
 
 ```json
 {
@@ -71,7 +71,7 @@ To authenticated user, you need to post data in json format
 #
 # Send command
 
-To send command (after authentification), post data in json format
+To send command, post data in json format with authentification bearer token
 
 ```json
 {
@@ -93,6 +93,10 @@ By using this, you disable Moreo's authentification process and send POST comman
     "cmd": ""           // command to be executed
 }
 ```
+
+#
+# Tokens
+Moreo use my own [jwt package implementation](https://github.com/pijee/pjwt)
 
 #
 # Example (with curl)
