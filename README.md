@@ -182,7 +182,10 @@ curl -v -X POST -H "Content-Type: application/json" -H "Authorization: bearer ey
 #
 # Timeout
 
-An internal go routine is running each X minutes (by default : 5) and clean local token database.
+All tokens uuid are referenced in internal memory database with timestamp.
+An internal go routine is running each X minutes (by default : 5) and deletes all tokens outdated. You can make token'life much longer by using **MOREO_TOKEN_LIFE** env variable.
+
+## Example
 If i'm waiting few minutes and send same request
 
 ```console
